@@ -16,7 +16,8 @@ const MovieReview = () => {
     }
 
     getReview().finally();
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="movie-review">

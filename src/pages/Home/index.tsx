@@ -17,6 +17,7 @@ const HomePage = () => {
     };
 
     getMovies().finally();
+    // eslint-disable-next-line
   },[])
 
   return (

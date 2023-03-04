@@ -18,6 +18,7 @@ const MovieCast: React.FC<any> = () => {
     }
 
     getMovieCast().finally();
+    // eslint-disable-next-line
   }, [])
 
   return (
