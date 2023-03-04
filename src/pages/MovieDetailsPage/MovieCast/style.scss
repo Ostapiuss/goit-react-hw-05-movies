@@ -1,0 +1,25 @@
+.movie-cast {
+
+  .cast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .cast-item {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .cast-image {
+      width: 200px;
+      height: 250px;
+    }
+
+    .cast-name {
+      font-weight: 600;
+    }
+  }
+}
