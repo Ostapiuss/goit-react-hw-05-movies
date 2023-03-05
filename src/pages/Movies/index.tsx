@@ -26,6 +26,7 @@ const SearchBar: React.FC<any> = () => {
     const redirect = location.pathname + location.search;
 
     getMoviesByRequest(redirect.replace('?', '&')).finally();
+    // eslint-disable-next-line
   }, [location.search]);
 
   const getMoviesByRequest = async (query?: string) => {
