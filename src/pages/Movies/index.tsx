@@ -1,10 +1,12 @@
 import React,
 {
-  ChangeEvent,
+  ChangeEvent, useEffect,
   useState
 } from "react";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import Notiflix from 'notiflix';
 
 import { searchMovies } from '../../api/movie-api';
 
@@ -17,10 +19,18 @@ const SearchBar: React.FC<any> = () => {
   const [searchText, setSearchText] = useState<string>('');
   const [movies, setMovies] = useState<Array<any>>([]);
 
-  const location = useLocation();
+  let location = useLocation();
+  const navigate = useNavigate();
 
-  const getMoviesByRequest = async () => {
-    const movies = await searchMovies(searchText);
+  useEffect(() => {
+    const redirect = location.pathname + location.search;
+
+    getMoviesByRequest(redirect.replace('?', '&')).finally();
+  }, [location.search]);
+
+  const getMoviesByRequest = async (query?: string) => {
+
+    const movies = await searchMovies(query ? query :`query=${searchText}`);
 
     setMovies(movies);
     setSearchText('');
@@ -29,7 +39,15 @@ const SearchBar: React.FC<any> = () => {
   const onSubmit = (event: any):void => {
     event.preventDefault();
 
-    getMoviesByRequest().finally();
+    if (searchText.trim()) {
+      getMoviesByRequest().finally();
+      navigate(`?query=${searchText}`);
+    } else {
+      Notiflix.Notify.warning(
+        'No movies found!'
+      );
+    }
+
   }
 
   const handleChange = (changeEvent: ChangeEvent) => {
@@ -65,7 +83,6 @@ const SearchBar: React.FC<any> = () => {
                 state={{
                   from: {
                     location,
-                    label: 'Go Back'
                   }
                 }}
               >

@@ -18,9 +18,9 @@ export const getMovie = async (movie_id: string): Promise<any> => {
   }
 }
 
-export const searchMovies = async (searchedText: string): Promise<Array<object>> => {
+export const searchMovies = async (query: string): Promise<Array<object>> => {
   try {
-    const {data: { results: movies }} =  await HTTP.get(`/search/movie`, `&language=en-US&page=1&include_adult=false&query=${searchedText}`);
+    const {data: { results: movies }} =  await HTTP.get(`/search/movie`, `&language=en-US&page=1&include_adult=false&${query}`);
     return movies;
   }catch (e) {
     throw new Error(e);

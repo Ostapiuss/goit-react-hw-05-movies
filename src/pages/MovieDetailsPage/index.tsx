@@ -33,7 +33,7 @@ const MovieDetailPage = () => {
   },[]);
 
   const onGoBack = () => {
-    navigate(location.state.from.location.pathname)
+    navigate(location.state.from.location)
   };
 
   return (
