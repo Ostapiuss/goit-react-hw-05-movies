@@ -29,11 +29,10 @@ const MovieDetailPage = () => {
 
     getCurrentMovieDetail().finally();
 
-    // eslint-disable-next-line
-  },[]);
+  },[pathname]);
 
   const onGoBack = () => {
-    navigate(location.state.from.location)
+    navigate(location?.state?.from?.location ?? "/")
   };
 
   return (
@@ -76,7 +75,7 @@ const MovieDetailPage = () => {
       </div>
 
       <div className="main-info">
-        <Outlet context={[movie]}/>
+        <Outlet context={[movie]} />
       </div>
     </div>
   )
